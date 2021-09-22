@@ -24,7 +24,7 @@ namespace HashTable_BST_CS
             binarySearch.Insert(63);
             binarySearch.Insert(67);
             binarySearch.Display();
-            binarySearch.GetSize();
+            Console.WriteLine(binarySearch.Search(67, binarySearch));
             Console.ReadLine();
         }
     }

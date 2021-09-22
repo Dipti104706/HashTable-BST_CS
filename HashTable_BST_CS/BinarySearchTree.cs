@@ -8,7 +8,7 @@ namespace HashTable_BST_CS
 {
     class BinarySearchTree<T> where T : IComparable<T>
     {/// <summary>
-    /// UC2 for bst to add element and show size of the BST
+    /// UC3 for bst to search 63 of the binary search tree
     /// </summary>
         public T RootNode { get; set; }
         public BinarySearchTree<T> LeftTree { get; set; }
@@ -21,6 +21,7 @@ namespace HashTable_BST_CS
         }
 
         int leftCount = 0, rightCount = 0;
+        bool result = false;
 
         //method for inserting element in binary search tree
         public void Insert(T item)
@@ -56,6 +57,32 @@ namespace HashTable_BST_CS
             Console.WriteLine("The size of the tree is" + " " + (1+this.leftCount + this.rightCount));
         }
 
+        //method for search node in BST
+        public bool Search(T element, BinarySearchTree<T> node)
+        {
+            if (node == null)
+            {
+                return false;
+            }
+            if (node.RootNode.Equals(element))
+            {
+                Console.WriteLine("Found the element in BST" + " " + node.RootNode);
+                result = true;
+            }
+            //else
+            //{
+            //    Console.WriteLine("Current element in BST is {0}", node.RootNode);
+            //}
+            if (element.CompareTo(node.RootNode) < 0)
+            {
+                Search(element, node.LeftTree);
+            }
+            if (element.CompareTo(node.RootNode) > 0)
+            {
+                Search(element, node.RightTree);
+            }
+            return result;
+        }
         public void Display()
         {
             if (this.LeftTree != null)
