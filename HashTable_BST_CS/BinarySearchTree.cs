@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace HashTable_BST_CS
 {
     class BinarySearchTree<T> where T : IComparable<T>
-    {
+    {/// <summary>
+    /// UC2 for bst to add element and show size of the BST
+    /// </summary>
         public T RootNode { get; set; }
         public BinarySearchTree<T> LeftTree { get; set; }
         public BinarySearchTree<T> RightTree { get; set; }
@@ -19,8 +21,8 @@ namespace HashTable_BST_CS
         }
 
         int leftCount = 0, rightCount = 0;
-        bool result = false;
 
+        //method for inserting element in binary search tree
         public void Insert(T item)
         {
             T currentNodeValue = this.RootNode;
@@ -46,6 +48,12 @@ namespace HashTable_BST_CS
                     this.RightTree.Insert(item);
                 }
             }
+        }
+
+        //method to give size of the binary search tree
+        public void GetSize()
+        {
+            Console.WriteLine("The size of the tree is" + " " + (1+this.leftCount + this.rightCount));
         }
 
         public void Display()
