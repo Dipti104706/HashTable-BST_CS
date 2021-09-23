@@ -19,8 +19,9 @@ namespace HashTable_BST_CS
             this.LeftTree = null;
             this.RightTree = null;
         }
-
-        int leftCount = 0, rightCount = 0;
+	//Instance variables get initiazed to 0 again 
+	//creating static variable, so that we can store and use
+        public static int leftCount = 0, rightCount = 0;
         bool result = false;
 
         //method for inserting element in binary search tree
@@ -54,7 +55,7 @@ namespace HashTable_BST_CS
         //method to give size of the binary search tree
         public void GetSize()
         {
-            Console.WriteLine("The size of the tree is" + " " + (1+this.leftCount + this.rightCount));
+            Console.WriteLine("The size of the tree is" + " " + (1+leftCount + rightCount));
         }
 
         //method for search node in BST
@@ -87,13 +88,13 @@ namespace HashTable_BST_CS
         {
             if (this.LeftTree != null)
             {
-                this.leftCount++;
+                leftCount++;
                 this.LeftTree.Display();
             }
             Console.WriteLine(this.RootNode.ToString());
             if (this.RightTree != null)
             {
-                this.rightCount++;
+                rightCount++;
                 this.RightTree.Display();
             }
         }
