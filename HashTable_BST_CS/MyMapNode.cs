@@ -79,7 +79,8 @@ namespace HashTable_BST_CS
                 if (itemFound)
                 {
                     linkedList.Remove(foundItem);
-                    Console.WriteLine("Removed successfully with key" + foundItem.Key); 
+                    Console.WriteLine("Removed successfully with key" + foundItem.Key);
+                    break;
                 }
             }
         }
