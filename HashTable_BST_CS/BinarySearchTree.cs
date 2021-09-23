@@ -20,7 +20,7 @@ namespace HashTable_BST_CS
             this.RightTree = null;
         }
 
-        int leftCount = 0, rightCount = 0;
+        public static int leftCount = 0, rightCount = 0;
         bool result = false;
 
         //method for inserting element in binary search tree
@@ -54,7 +54,7 @@ namespace HashTable_BST_CS
         //method to give size of the binary search tree
         public void GetSize()
         {
-            Console.WriteLine("The size of the tree is" + " " + (1+this.leftCount + this.rightCount));
+            Console.WriteLine("The size of the tree is" + " " + (1+leftCount +rightCount));
         }
 
         //method for search node in BST
@@ -83,17 +83,18 @@ namespace HashTable_BST_CS
             }
             return result;
         }
+
         public void Display()
         {
             if (this.LeftTree != null)
             {
-                this.leftCount++;
+                leftCount++;
                 this.LeftTree.Display();
             }
             Console.WriteLine(this.RootNode.ToString());
             if (this.RightTree != null)
             {
-                this.rightCount++;
+                rightCount++;
                 this.RightTree.Display();
             }
         }
