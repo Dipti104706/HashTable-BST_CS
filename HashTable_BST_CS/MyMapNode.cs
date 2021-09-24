@@ -5,7 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HashTable_BST_CS
-{
+{/// <summary>
+/// UC1 to check frequency of words of a given sentence
+/// </summary>
+/// <typeparam name="K"></typeparam>
+/// <typeparam name="V"></typeparam>
     public class MyMapNode<K, V> 
     {
         //this method is for passing Keyvalues in linkedlist, m,n are data types
@@ -59,6 +63,17 @@ namespace HashTable_BST_CS
             KeyValue<K, V> item = new KeyValue<K, V>()
             //assign values to Key and Value
             { Key = key, Value = value };
+            if (linkedList.Count != 0)
+            {
+                foreach (KeyValue<K, V> item1 in linkedList)
+                {
+                    if (item1.Key.Equals(key))
+                    {
+                        Remove(key);
+                        break;
+                    }
+                }
+            }
             linkedList.AddLast(item);
         }
 
@@ -75,23 +90,38 @@ namespace HashTable_BST_CS
         }
 
         //method to display frequencies of word
-        public int CountFrequency(V Value)
+        public void CountFrequency(string sentence)
         {
-            int count = 0;
-            //string res = GetArrayPosition(Value);
-            //int position = GetArrayPosition(Key);
-            //LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(position);
-            foreach (var linkedList in items)
+            MyMapNode<string, int> myHashTable = new MyMapNode<string, int>(10);
+            string[] words = sentence.ToLower().Split(' ');
+            foreach (string word in words)
             {
-                foreach (KeyValue<K, V> item in linkedList)
+                if (myHashTable.ExistKey(word))
                 {
-                    if (item.Value.Equals(Value))
-                    {
-                        count++;
-                    }
+                    myHashTable.Add(word, myHashTable.Get(word) + 1);
+                }
+                else
+                {
+                    myHashTable.Add(word, 1);
                 }
             }
-            return count;
+            Console.WriteLine("Displaying the frequencies of words");
+            myHashTable.Display();
+        }
+
+        //check key present or not
+        public bool ExistKey(K key)
+        {
+            int position = GetArrayPosition(key);
+            LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(position);
+            foreach (KeyValue<K, V> item in linkedList)
+            {
+                if (item.Key.Equals(key))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void Display()
