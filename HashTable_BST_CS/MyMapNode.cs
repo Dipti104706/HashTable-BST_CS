@@ -59,7 +59,32 @@ namespace HashTable_BST_CS
             KeyValue<K, V> item = new KeyValue<K, V>()
             //assign values to Key and Value
             { Key = key, Value = value };
+            if (linkedList.Count != 0) 
+            {
+                foreach(KeyValue<K, V> item1 in linkedList)
+                {
+                    if(item1.Key.Equals(key))
+                    {
+                        Remove(key);
+                        break;
+                    }
+                }
+            }
             linkedList.AddLast(item);
+        }
+
+        public bool ExistKey(K key)
+        {
+            int position = GetArrayPosition(key);
+            LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(position);
+            foreach (KeyValue<K, V> item in linkedList)
+            {
+                if (item.Key.Equals(key))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         //Method to remove a value from hashtable
@@ -79,7 +104,8 @@ namespace HashTable_BST_CS
                 if (itemFound)
                 {
                     linkedList.Remove(foundItem);
-                    Console.WriteLine("Removed successfully with key" + foundItem.Key); 
+                    //Console.WriteLine("Removed successfully with key" + foundItem.Key);
+                    break;
                 }
             }
         }
@@ -96,23 +122,23 @@ namespace HashTable_BST_CS
         }
 
         //method to display frequencies of word
-        public int CountFrequency(V Value)
+        public void CountFrequency(string sentence)
         {
-            int count = 0;
-            //string res = GetArrayPosition(Value);
-            //int position = GetArrayPosition(Key);
-            //LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(position);
-            foreach (var linkedList in items)
+            MyMapNode<string, int> myHashTable = new MyMapNode<string, int>(10);
+            string[] words = sentence.ToLower().Split(' ');
+            foreach (string word in words)
             {
-                foreach (KeyValue<K, V> item in linkedList)
+                if (myHashTable.ExistKey(word))
                 {
-                    if (item.Value.Equals(Value))
-                    {
-                        count++;
-                    }
+                    myHashTable.Add(word, myHashTable.Get(word) + 1);
+                }
+                else
+                {
+                    myHashTable.Add(word, 1);
                 }
             }
-            return count;
+            Console.WriteLine("Displaying the frequencies of words");
+            myHashTable.Display();
         }
 
         public void Display()
